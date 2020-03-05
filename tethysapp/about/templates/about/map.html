@@ -1,75 +1,96 @@
-{% extends "about/base.html" %}
-{% load tethys_gizmos %}
+{% extends "demo/base.html" %}
+	{% block app_content %}
 
-{% block header_buttons %}
-  <div class="header-button glyphicon-button" data-toggle="tooltip" data-placement="bottom" title="Help">
-    <a data-toggle="modal" data-target="#help-modal"><span class="glyphicon glyphicon-question-sign"></span></a>
-  </div>
-{% endblock %}
 
-{% block app_content %}
-<h1>Alexander J White</h1>
- <p>A biproduct from the marriage of James and Tamara White, Alex was born in Preston Idaho on January 12, 1994.</p>
- <p>Although not popular enough to be featured in the popular film Napolean Dynamite, Alex has still done many interesting things in his 26 years of life.</p>
-<h2>High School</h2>
- <p>Alex graduated in 2012.  He not only was active in playing soccer and lacrosse, but also started a ping pong club at his school.</p>
-<h2>BYU</h2>
- <p>Despite everyone telling him that Utah State was the place to be, Alex decided to go to BYU. <br>
-    He started out studying Computer Science but quickly found that coding wasn't his thing. <br>
-    Soon enough, he came to the light side and will graduate in Civil Engineering this April 2020. <br>
-    He will graduate a single man, to his mother's despair.  How ever will he find a good Mormon girl now....
- </p>
-<h2>Miscellaneous</h2>
- <p>
-   Alex enjoys many things.  A major hobby in his life has been motorcycle riding.<br>
-   Since he had his drivers license he has ridden motorcycles. <br>
-   Currently he rides a Kawasaki Z1000. <br>
-   //insert bike picture
-</p>
-<p>
-   Alex also is active in other groupls like the Timpanogos Caving Grotto. <br>
-   He has been able to see a lot of Utah caves with their help. <br>
-   //caving picture
-   Alex also likes to be outside exploring.  He recently went to all 5 National Parks in Southern Utah. <br>
-   His power rankings, 1 being his favorite, are as follows: <br>
-   1. Arches <br>
-   2. Zion <br>
-   3. Capital Reef <br>
-   4. Canyonlands <br>
-   5. Bryce <br>
-   <br>
-   Alex also enjoys rock climbing, bouldering, music, movies, architecture, art, video games, seeing new places, and annoying people.
-</p>
-{% endblock %}
 
-{# Use the after_app_content block for modals #}
-{% block after_app_content %}
-  <!-- Example Modal -->
-  <div class="modal fade" id="help-modal" tabindex="-1" role="dialog" aria-labelledby="help-modal-label">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h5 class="modal-title" id="help-modal-label">Example Modal</h5>
-        </div>
-        <div class="modal-body">
-          <p>You can add custom buttons to the app header using the <code>header_buttons</code> block. Use anchor/link tags for the button and wrap it in a div with the class <code>header-button</code>. For buttons with the gliphyicons, add the <code>glyphicon-button</code> class as well.</p>
-          <p>Ever have trouble using a modal in a Tethys app? Use the <code>after_app_content</code> block for modal content to allow them to function properly. See: <a href="https://getbootstrap.com/javascript/#modals">Bootstrap Modals</a></p>
-          <p>Add tooltips to any element by adding the <code>data-toggle</code>, <code>data-placement</code>, and <code>title</code> attributes to the button. See: <a href="https://getbootstrap.com/javascript/#tooltips">Bootstrap Tooltips</a></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
+	<head>
 
-{% block app_actions %}
-  {% gizmo save_button %}
-  {% gizmo edit_button %}
-  {% gizmo remove_button %}
-  {% gizmo previous_button %}
-  {% gizmo next_button %}
-{% endblock %}
+	    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	          crossorigin=""/>
+	    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	            crossorigin=""></script>
+
+	    <style>
+	        #mapid { height: 500px; }
+
+	        h1 {
+	            font-family: cursive;
+	            color: white;
+	            font-weight: bolder;
+	            text-align: center;
+	            background-color: red;
+	        }
+	        h2 {
+	            font-family: cursive;
+	            color: white;
+	            font-weight: bold;
+	            text-align: center;
+	            background-color: red;
+	        }
+	        h3 {
+	            font-family: cursive;
+	            color: white;
+	            font-weight: bold;
+	            text-align: center;
+	            background-color: red;
+	        }
+	        body{
+	            background-color: #000000;
+	        }
+	    </style>
+	</head>
+
+	<h1> Abhishek Amalaraj </h1>
+	<h2> CEEN 514 Homework 7 <br></br>Build an Interactive Page with Leaflet Open Source Mapping API</h2>
+	<h3> Date: 2/16/2019</h3>
+
+
+	<div id="mapid"></div>
+
+
+
+	<script>
+	    var mymap = L.map('mapid').setView([11.0168, 76.9558], 14);
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+	    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	    maxZoom: 32,
+	    id: 'mapbox/streets-v11',
+	    accessToken: 'pk.eyJ1IjoiYWJoaXNoZWthbWFsMTgiLCJhIjoiY2s1eTVxNGExMmQ5MDNubjExaWY5MjdvbSJ9.3nmdjWZmUCDNyRdlPo5gbg'
+	}).addTo(mymap);
+
+
+	var circle = L.circle([10.999905, 76.974481], {
+	    color: 'red',
+	    fillColor: '#f03',
+	    fillOpacity: 0.5,
+	    radius: 600
+	}).addTo(mymap);
+	circle.bindPopup("<b>Hangout spot with friends</b><br>Snacks and aimless fun was our motto");
+
+	var marker = L.marker([10.998493, 76.990770]).addTo(mymap);
+	marker.bindPopup("<b>My home BRANCH :) </b><br>I got baptized here in 2009").openPopup();
+
+	var marker = L.marker([11.001484, 77.017835]).addTo(mymap);
+	marker.bindPopup("<b>My school !</b><br>only the legends go there").openPopup();
+
+	var marker = L.marker([11.003954, 77.012356]).addTo(mymap);
+	marker.bindPopup("<b>My home !</b><br>I ate a lot here and watched TV !").openPopup();
+
+	var circle = L.circle([11.003954, 77.012356], {
+	    color: 'green',
+	    fillColor: '#f03',
+	    fillOpacity: 0.5,
+	    radius: 800
+	}).addTo(mymap);
+	circle.bindPopup("<b>My home and neighborhood</b><br>Lots of love and memories");
+
+	// var popup = L.popup()
+	//     .setLatLng([11.001484, 77.017835])
+	//     .setContent("My school - only the legends go there !")
+	//     .openOn(mymap);
+	</script>
+	<body></body>
+	{% endblock %}

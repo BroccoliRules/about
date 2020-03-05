@@ -70,17 +70,13 @@ def home(request):
         'previous_button': previous_button,
         'next_button': next_button
     }
-  
+
 return render(request, 'about/home.html', context)
 
-@login_required()
+#@login_required()
 def map(request):
-    """
-    Controller for the map page.
-    """
-
-    context = {}
-    return render(request, 'about/map.html', context)
-
-
-  
+	    """
+	    Controller for the page.
+	    """
+	    context = {}
+	    return render(request, 'about/map.html', context)
